@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
-import { BrowserRouter as Router } from "react-router-dom";
-
-import { handleInitialData } from "./actions/shared";
-import Routes from "./components/Routes";
-import NavBar from "./components/NavBar";
-import Login from "./components/Login";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import "../App.css";
+import "bootstrap/dist/css/bootstrap.css";
+import { handleInitialData } from "../actions/shared";
+import Routes from "./Routes";
+import NavBar from "./NavBar";
 
 class App extends Component {
   componentDidMount() {

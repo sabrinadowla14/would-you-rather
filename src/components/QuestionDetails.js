@@ -34,13 +34,15 @@ class QuestionDetails extends PureComponent {
   };
 
   render() {
-    const { question, questionAuthor, answer } = this.props;
+    const {
+      question,
+      questionAuthor,
+      answer,
+      total,
+      percOne,
+      percTwo
+    } = this.props;
     const { selectedOption } = this.state;
-    const { optionOne, optionTwo } = question;
-    const total =
-      question.optionOne.votes.length + question.optionTwo.votes.length;
-    const percOneVal = financial((optionOne.votes.length / total) * 100);
-    const percTwoVal = financial((optionTwo.votes.length / total) * 100);
 
     return (
       <Row>
@@ -78,12 +80,12 @@ class QuestionDetails extends PureComponent {
                   <div className="progress">
                     <div
                       className="progress-one"
-                      style={{ width: `${percOneVal}%` }}
-                    >{`${percOneVal}%`}</div>
+                      style={{ width: `${percOne}%` }}
+                    >{`${percOne}%`}</div>
                     <div
                       className="progress-two"
-                      style={{ width: `${percTwoVal}%` }}
-                    >{`${percTwoVal}%`}</div>
+                      style={{ width: `${percTwo}%` }}
+                    >{`${percTwo}%`}</div>
                   </div>
                   <div className="total">Total number of votes: {total}</div>
                 </div>
@@ -136,16 +138,18 @@ function financial(x) {
   return Number.parseFloat(x).toFixed(2);
 }
 
-function mapStateToProps({ questions, users, authedUser }, { id }) {
+function mapStateToProps({ questions, users, authedUser }, { match }) {
   const answers = users[authedUser].answers;
   let answer, percOne, percTwo, total;
-  //const { id } = props.match.params;
+  const { id } = match.params;
   const question = questions[id];
   if (answers.hasOwnProperty(question.id)) {
     answer = answers[question.id];
   }
   const questionAuthor = users[question.author];
-
+  total = question.optionOne.votes.length + question.optionTwo.votes.length;
+  percOne = financial((question.optionOne.votes.length / total) * 100);
+  percTwo = financial((question.optionTwo.votes.length / total) * 100);
   return {
     question,
     questionAuthor,

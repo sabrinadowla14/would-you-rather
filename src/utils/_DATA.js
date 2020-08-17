@@ -162,15 +162,6 @@ function formatQuestion({ optionOneText, optionTwoText, author }) {
     }
   };
 }
-function formatUser({ username, name, avatarURL }) {
-  return {
-    id: username,
-    name,
-    avatarURL,
-    answers: [],
-    questions: []
-  };
-}
 
 export function _saveQuestion(question) {
   return new Promise((res, rej) => {
@@ -186,8 +177,8 @@ export function _saveQuestion(question) {
       users = {
         ...users,
         [authedUser]: {
-          ...users[authedUser]
-          //questions: users[authedUser].questions.concat([formattedQuestion.id])
+          ...users[authedUser],
+          questions: users[authedUser].questions.concat([formattedQuestion.id])
         }
       };
 
@@ -224,4 +215,13 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
       res();
     }, 500);
   });
+}
+function formatUser({ username, name, avatarURL }) {
+  return {
+    id: username,
+    name,
+    avatarURL,
+    answers: [],
+    questions: []
+  };
 }

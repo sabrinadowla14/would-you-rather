@@ -11,20 +11,20 @@ export function receiveUsers(users) {
   };
 }
 
-export function addUserQuestion(authedUser, qId) {
+export function addUserQuestion(authedUser, id) {
   return {
     type: ADD_USER_QUESTION,
     authedUser,
-    qId
+    id
   };
 }
 
-export function addUserQuestionAnswer(authedUser, qid, selectedOption) {
+export function addUserQuestionAnswer(authedUser, qid, answer) {
   return {
     type: ADD_USER_QUESTION_ANSWER,
     authedUser,
     qid,
-    selectedOption
+    answer
   };
 }
 

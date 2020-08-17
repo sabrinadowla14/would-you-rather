@@ -15,6 +15,18 @@ export function getInitialData() {
   );
 }
 
+export function getInitialUsers() {
+  return Promise.all([_getUser()]).then(([users]) => ({
+    users
+  }));
+}
+
+export function getInitialQuestions() {
+  return Promise.all([_getQuestions()]).then(([questions]) => ({
+    questions
+  }));
+}
+
 export function saveQuestionAnswer(info) {
   return _saveQuestionAnswer(info);
 }
