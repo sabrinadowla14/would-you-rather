@@ -12,6 +12,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import React, { PureComponent, Fragment } from "react";
 import User from "./User";
+import unsetAuthedUser from "../actions/authedUser";
+import Logout from "./Logout";
 
 class NavBar extends PureComponent {
   state = {
@@ -52,7 +54,11 @@ class NavBar extends PureComponent {
                     <User id={authedUser} />
                   </NavItem>
                   <NavItem>
-                    <NavLink tag={Link} to="/logout">
+                    <NavLink
+                      tag={Link}
+                      to="/logout"
+                      onClick={this.props.handleLogout}
+                    >
                       Logout
                     </NavLink>
                   </NavItem>
@@ -65,10 +71,6 @@ class NavBar extends PureComponent {
     );
   }
 }
-
-NavBar.propTypes = {
-  authedUser: PropTypes.string
-};
 
 function mapStateToProps({ authedUser }) {
   return {

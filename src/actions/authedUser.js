@@ -4,7 +4,7 @@ export const SET_AUTHED_USER = "SET_AUTHED_USER";
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 export const SIGN_OUT = "SIGN_OUT";
-export const UNSET_AUTHED_USER = "SUNSET_AUTHED_USER";
+export const REMOVE_AUTHED_USER = "REMOVE_AUTHED_USER";
 
 export function setAuthedUser(id) {
   return {
@@ -13,9 +13,9 @@ export function setAuthedUser(id) {
   };
 }
 
-export function unsetAuthedUser() {
+export function removeAuthedUser() {
   return {
-    type: UNSET_AUTHED_USER
+    type: REMOVE_AUTHED_USER
   };
 }
 

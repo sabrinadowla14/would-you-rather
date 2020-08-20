@@ -58,7 +58,7 @@ export function handleAddQuestion(optionOneText, optionTwoText) {
       author
     }).then(question => {
       dispatch(addQuestion(question));
-      dispatch(addUserQuestion(authedUser, question.id));
+      //dispatch(addUserQuestion(authedUser, question.id));
       dispatch(hideLoading());
     });
   };

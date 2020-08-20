@@ -9,6 +9,7 @@ import NewQuestion from "./NewQuestion";
 import QuestionDetails from "./QuestionDetails";
 import PageNotFound from "./PageNotFound";
 import Logout from "./Logout";
+import Navbar from "./NavBar";
 
 function Routes(props) {
   return (

@@ -13,38 +13,45 @@ import {
   Label,
   Row
 } from "reactstrap";
-import { handleAddQuestionAnswer } from "../actions/shared";
+import { handleAddQuestion } from "../actions/shared";
 import { Redirect } from "react-router-dom";
 
 class NewQuestion extends Component {
   state = {
     optionOne: "",
     optionTwo: "",
-    redirect: false
+    location: false
   };
 
-  handleOptionOneChange = event => {
-    event.preventDefault();
+  handleOptionOneChange = e => {
+    e.preventDefault();
     this.setState({
-      optionOne: event.target.value
+      optionOne: e.target.value
     });
   };
 
-  handleOptionTwoChange = event => {
-    event.preventDefault();
+  handleOptionTwoChange = e => {
+    e.preventDefault();
     this.setState({
-      optionTwo: event.target.value
+      optionTwo: e.target.value
     });
   };
 
-  handleSubmit = event => {
-    event.preventDefault();
+  handleOptionSubmit = e => {
+    e.preventDefault();
     const { optionOne, optionTwo } = this.state;
-    this.props.addQuestion(optionOne, optionTwo);
-    this.setState({ redirect: true });
+    this.props.saveQuestion(optionOne, optionTwo);
+    this.setState({
+      optionOne: "",
+      optionTwo: "",
+      location: true
+    });
   };
 
   render() {
+    if (this.state.location) {
+      return <Redirect to="/" />;
+    }
     const { optionOne, optionTwo } = this.state;
     return (
       <Row>
@@ -52,7 +59,7 @@ class NewQuestion extends Component {
           <Card>
             <CardBody>
               <CardTitle>Would You Rather</CardTitle>
-              <Form onSubmit={this.handleSubmit}>
+              <Form onSubmit={this.handleOptionSubmit}>
                 <FormGroup>
                   <Label for="optionOne">Option One</Label>
                   <Input
@@ -74,7 +81,7 @@ class NewQuestion extends Component {
                   />
                 </FormGroup>
                 <Button disabled={optionOne === "" || optionTwo === ""}>
-                  Submit
+                  Submit Option
                 </Button>
               </Form>
             </CardBody>
@@ -85,15 +92,10 @@ class NewQuestion extends Component {
   }
 }
 
-NewQuestion.propTypes = {
-  authedUser: PropTypes.string,
-  addQuestion: PropTypes.func.isRequired
-};
-
 function mapDispatchToProps(dispatch) {
   return {
-    addQuestion: (optionOne, optionTwo) => {
-      dispatch(handleAddQuestionAnswer(optionOne, optionTwo));
+    saveQuestion: (optionOne, optionTwo) => {
+      dispatch(handleAddQuestion(optionOne, optionTwo));
     }
   };
 }
