@@ -13,7 +13,7 @@ import {
   Label,
   Row
 } from "reactstrap";
-import { handleAddQuestionAnswer } from "../actions/shared";
+import { handleAddQuestion } from "../actions/shared";
 import { Redirect } from "react-router-dom";
 
 class NewQuestion extends Component {
@@ -93,7 +93,7 @@ NewQuestion.propTypes = {
 function mapDispatchToProps(dispatch) {
   return {
     addQuestion: (optionOne, optionTwo) => {
-      dispatch(handleAddQuestionAnswer(optionOne, optionTwo));
+      dispatch(handleAddQuestion(optionOne, optionTwo));
     }
   };
 }

@@ -1,107 +1,79 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
 import Question from "./Question";
 
-import {
-  TabContent,
-  TabPane,
-  Nav,
-  NavItem,
-  NavLink,
-  Card,
-  Button,
-  CardTitle,
-  CardText,
-  Row,
-  Col
-} from "reactstrap";
-import classnames from "classnames";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
-
-class DashBoard extends Component {
+class Dashboard extends Component {
   state = {
-    questionSelected: "unanswered",
-    activeTab: "1"
+    answered: false
   };
 
-  toggle(e, tab) {
-    if (this.state.activeTab !== tab) {
-      this.setState({
-        questionSelected: tab,
-        activeTab: tab
-      });
-    }
-  }
+  handleChangeAnswered = (e, answered) => {
+    e.preventDefault();
+
+    this.setState(() => ({
+      answered
+    }));
+  };
 
   render() {
-    const { qid } = this.props;
-    return (
-      <div>
-        <Nav tabs>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === "1" })}
-              onClick={() => {
-                this.toggle("1");
-              }}
-            >
-              Unanswered
-            </NavLink>
-          </NavItem>
-          <NavItem>
-            <NavLink
-              className={classnames({ active: this.state.activeTab === "2" })}
-              onClick={() => {
-                this.toggle("2");
-              }}
-            >
-              Answered
-            </NavLink>
-          </NavItem>
-        </Nav>
+    if (!this.props.authedUser) {
+      return (
+        <Redirect
+          to={{
+            pathname: "/login",
+            state: {
+              returnPath: "/"
+            }
+          }}
+        />
+      );
+    }
 
-        <TabContent activeTab={this.state.activeTab}>
-          <TabPane tabId="1">
-            <Row>
-              {qid.map(qid => (
-                <Col key={qid} sm="6" md="4">
-                  <Question
-                    id={qid}
-                    questionSelected={this.state.questionSelected}
-                  />
-                </Col>
+    return (
+      <div className="questions-list">
+        {this.state.answered === true ? (
+          <h3 className="center">Answered Questions</h3>
+        ) : (
+          <h3 className="center">Unanswered Questions</h3>
+        )}
+        <div className="btn-list-group">
+          <button className="btn" onClick={e => this.toggleAnswered(e, false)}>
+            Unanswered
+          </button>
+          <button className="btn" onClick={e => this.toggleAnswered(e, true)}>
+            Answered
+          </button>
+        </div>
+        <ul>
+          {this.state.answered
+            ? this.props.answeredQuestions.map(id => (
+                <li key={id}>
+                  <Question id={id} />
+                </li>
+              ))
+            : this.props.unansweredQuestions.map(id => (
+                <li key={id}>
+                  <Question id={id} />
+                </li>
               ))}
-            </Row>
-          </TabPane>
-          <TabPane tabId="2">
-            <Row>
-              {qid.map(qid => (
-                <Col key={qid} sm="6" md="4">
-                  <Question
-                    id={qid}
-                    questionSelected={this.state.questionSelected}
-                  />
-                </Col>
-              ))}
-            </Row>
-          </TabPane>
-        </TabContent>
+        </ul>
       </div>
     );
   }
 }
 
-DashBoard.propTypes = {
-  answeredPolls: PropTypes.array,
-  unansweredPolls: PropTypes.array
-};
+function mapStateToProps({ questions, users, authedUser }) {
+  const user = users[authedUser];
 
-function mapStateToProps({ questions }) {
+  const answeredQuestions = Object.keys(users[authedUser].answers).sort(
+    (a, b) => user.answers[b].timestamp - user.answers[a].timestamp
+  );
   return {
-    qid: Object.keys(questions).sort(
-      (a, b) => questions[b].timestamp - questions[a].timestamp
-    )
+    unansweredQuestions: Object.keys(questions)
+      .filter(id => !answeredQuestions.includes(id))
+      .sort((a, b) => questions[b].timestamp - questions[a].timestamp),
+    answeredQuestions
   };
 }
-
-export default connect(mapStateToProps)(DashBoard);
+export default connect(mapStateToProps)(Dashboard);

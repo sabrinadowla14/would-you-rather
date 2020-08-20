@@ -1,7 +1,13 @@
-import { getInitialData, saveQuestionAnswer, saveQuestion } from "../utils/api";
+import {
+  getInitialData,
+  saveQuestionAnswer,
+  saveQuestion,
+  getInitialQuestions,
+  getInitialUsers
+} from "../utils/api";
 import { receiveUsers, addUserQuestion, addUserQuestionAnswer } from "./users";
-import { addQuestion, addQuestionAnswer } from "./questions";
-//import { setAuthedUser } from "../actions/authedUser";
+import { receiveQuestions, addQuestion, addQuestionAnswer } from "./questions";
+import { setAuthedUser } from "./authedUser";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 
 /* This function is going to use the Redux return pattern because we want to make an
@@ -19,41 +25,66 @@ export function handleInitialData() {
     });
   };
 }
-export function handleAddQuestion(optionOneText, optionTwoText, callback) {
-  return (dispatch, getState) => {
+
+export function handleInitialQuestions() {
+  return dispatch => {
     dispatch(showLoading());
-
-    const { authedUser } = getState();
-
-    saveQuestion({
-      optionOneText,
-      optionTwoText,
-      authedUser
-    })
-      .then(question => {
-        dispatch(addUserQuestion(question));
-        dispatch(addQuestion(question));
-        dispatch(showLoading());
-      })
-      .then(callback);
+    return getInitialQuestions().then(({ questions }) => {
+      dispatch(receiveQuestions(questions));
+      dispatch(hideLoading());
+    });
   };
 }
 
-export function handleAddQuestionAnswer(qid, selectedOption) {
-  return (dispatch, getState) => {
+export function handleInitialUsers(AUTHED_ID) {
+  return dispatch => {
     dispatch(showLoading());
-
-    const { login } = getState();
-    const authedUser = login.loggedInUser.id;
-
-    saveQuestionAnswer({
-      authedUser,
-      qid: qid,
-      answer: selectedOption
-    }).then(() => {
-      dispatch(addQuestionAnswer(authedUser, qid, selectedOption));
-      dispatch(addUserQuestionAnswer(authedUser, qid, selectedOption));
+    return getInitialUsers().then(({ users }) => {
+      dispatch(receiveUsers(users));
+      dispatch(setAuthedUser(AUTHED_ID));
       dispatch(hideLoading());
     });
+  };
+}
+
+export function handleAddQuestion(optionOneText, optionTwoText) {
+  return (dispatch, getState) => {
+    const { authedUser } = getState();
+    const author = authedUser;
+    dispatch(showLoading());
+    saveQuestion({
+      optionOneText,
+      optionTwoText,
+      author
+    }).then(question => {
+      dispatch(addQuestion(question));
+      dispatch(addUserQuestion(authedUser, question.id));
+      dispatch(hideLoading());
+    });
+  };
+}
+
+export function handleAddQuestionAnswer(qid, answer) {
+  return (dispatch, getState) => {
+    const { authedUser } = getState();
+    dispatch(showLoading());
+
+    return saveQuestionAnswer({
+      qid,
+      answer,
+      authedUser
+    })
+      .then(
+        () =>
+          dispatch(
+            addQuestionAnswer({
+              qid,
+              answer,
+              authedUser
+            })
+          )
+        //dispatch(addUserQuestionAnswer(qid, answer, authedUser))
+      )
+      .then(() => dispatch(hideLoading()));
   };
 }

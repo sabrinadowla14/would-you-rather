@@ -124,14 +124,6 @@ class QuestionDetails extends PureComponent {
   }
 }
 
-QuestionDetails.propTypes = {
-  question: PropTypes.object,
-  questionAuthor: PropTypes.object,
-  answer: PropTypes.string,
-  percOne: PropTypes.string.isRequired,
-  percTwo: PropTypes.string.isRequired
-};
-
 function financial(x) {
   return Number.parseFloat(x).toFixed(2);
 }

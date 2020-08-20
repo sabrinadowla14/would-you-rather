@@ -2,8 +2,7 @@ let users = {
   sarahedo: {
     id: "sarahedo",
     name: "Sarah Edo",
-    avatarURL:
-      "https://pbs.twimg.com/profile_images/982796605425303552/phhp5grt_400x400.jpg",
+    avatarURL: "https://tylermcginnis.com/would-you-rather/sarah.jpg",
     answers: {
       "8xf0y6ziyjabvozdd253nd": "optionOne",
       "6ni6ok3ym7mf1p33lnez": "optionOne",
@@ -15,8 +14,7 @@ let users = {
   tylermcginnis: {
     id: "tylermcginnis",
     name: "Tyler McGinnis",
-    avatarURL:
-      "https://pbs.twimg.com/profile_images/803732106513743872/o-JoI9g7_400x400.jpg",
+    avatarURL: "https://tylermcginnis.com/would-you-rather/tyler.jpg",
     answers: {
       vthrdm985a262al8qx3do: "optionOne",
       xj352vofupe1dqz9emx13r: "optionTwo"
@@ -26,8 +24,7 @@ let users = {
   johndoe: {
     id: "johndoe",
     name: "John Doe",
-    avatarURL:
-      "https://pbs.twimg.com/profile_images/446356636710363136/OYIaJ1KK_400x400.png",
+    avatarURL: "https://tylermcginnis.com/would-you-rather/dan.jpg",
     answers: {
       xj352vofupe1dqz9emx13r: "optionOne",
       vthrdm985a262al8qx3do: "optionTwo",
@@ -162,15 +159,6 @@ function formatQuestion({ optionOneText, optionTwoText, author }) {
     }
   };
 }
-function formatUser({ username, name, avatarURL }) {
-  return {
-    id: username,
-    name,
-    avatarURL,
-    answers: [],
-    questions: []
-  };
-}
 
 export function _saveQuestion(question) {
   return new Promise((res, rej) => {
@@ -186,8 +174,8 @@ export function _saveQuestion(question) {
       users = {
         ...users,
         [authedUser]: {
-          ...users[authedUser]
-          //questions: users[authedUser].questions.concat([formattedQuestion.id])
+          ...users[authedUser],
+          questions: users[authedUser].questions.concat([formattedQuestion.id])
         }
       };
 
@@ -197,6 +185,7 @@ export function _saveQuestion(question) {
 }
 
 export function _saveQuestionAnswer({ authedUser, qid, answer }) {
+  console.log(authedUser);
   return new Promise((res, rej) => {
     setTimeout(() => {
       users = {
@@ -220,8 +209,17 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
           }
         }
       };
-
       res();
     }, 500);
   });
+}
+
+function formatUser({ username, name, avatarURL }) {
+  return {
+    id: username,
+    name,
+    avatarURL,
+    answers: [],
+    questions: []
+  };
 }

@@ -3,7 +3,7 @@ import { Label, Row, Col } from "reactstrap";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { setAuthedUser } from "../actions/authedUser";
-//import { Redirect } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 class Login extends Component {
   state = {
@@ -30,11 +30,11 @@ class Login extends Component {
 
   render() {
     const { users } = this.props;
-    //const { userId } = this.state;
+    const { userId } = this.state;
 
-    /*if (this.props.authedUser === true) {
+    if (this.props.authedUser === true) {
       return <Redirect to={`/questions/${this.props.id}`} />;
-    }  */
+    }
     return (
       <Row>
         <Col sm="6" md={{ size: 4, offset: 5 }}>
@@ -49,6 +49,7 @@ class Login extends Component {
                 id="userId"
                 onChange={e => this.handleChange(e)}
               >
+                <option value="">Please Select User</option>{" "}
                                     
                 {Object.keys(this.props.users).map(user => {
                   return (
@@ -77,11 +78,6 @@ class Login extends Component {
     );
   }
 }
-
-Login.propTypes = {
-  users: PropTypes.object.isRequired,
-  authedUser: PropTypes.func.isRequired
-};
 
 function mapStateToProps({ users }) {
   return {
