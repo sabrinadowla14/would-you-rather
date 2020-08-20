@@ -20,7 +20,11 @@ class Question extends React.Component {
     }));
   };
   render() {
+<<<<<<< HEAD
     const { question, id, author, authedUser, avatarURL } = this.props;
+=======
+    const { question, id, author, authedUser } = this.props;
+>>>>>>> 20fdc773e5a90afce51a88c20192af743a6452f8
 
     return (
       <div className="questions-list">
@@ -47,7 +51,10 @@ class Question extends React.Component {
                 className="avatar"
                 src={`/${}`}
              /> */}
+<<<<<<< HEAD
                 <Avatar avatarURL={avatarURL} className="mr-2" />
+=======
+>>>>>>> 20fdc773e5a90afce51a88c20192af743a6452f8
               </div>
               <div className="question-body">
                 <ul>
@@ -67,6 +74,7 @@ class Question extends React.Component {
   }
 }
 
+<<<<<<< HEAD
 function mapStateToProps({ authedUser, users, questions }, { id }) {
   const user = users[authedUser];
   return {
@@ -77,6 +85,15 @@ function mapStateToProps({ authedUser, users, questions }, { id }) {
     author: questions[id] ? users[questions.questions[id].author] : null,
     authedUser,
     id
+=======
+function mapStateToProps({ authedUser, users, questions }, { qid }) {
+  return {
+    question: questions[qid],
+    avatarURL: users[qid.avatarURL],
+    //author: questions[qid] ? users[questions.questions[qid].author] : null,
+    authedUser,
+    id: qid
+>>>>>>> 20fdc773e5a90afce51a88c20192af743a6452f8
   };
 }
 

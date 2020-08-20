@@ -213,7 +213,10 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
     }, 500);
   });
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> 20fdc773e5a90afce51a88c20192af743a6452f8
 function formatUser({ username, name, avatarURL }) {
   return {
     id: username,

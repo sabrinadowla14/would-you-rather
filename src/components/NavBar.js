@@ -76,4 +76,4 @@ function mapStateToProps({ authedUser }) {
   };
 }
 
-export default withRouter(connect(mapStateToProps, null)(NavBar));
+export default connect(mapStateToProps, null)(NavBar);

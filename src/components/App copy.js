@@ -2,7 +2,17 @@ import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+<<<<<<< HEAD
+<<<<<<< HEAD:src/components/App copy.js
 
+=======
+import "../App.css";
+import "bootstrap/dist/css/bootstrap.css";
+>>>>>>> 20fdc773e5a90afce51a88c20192af743a6452f8:src/components/App.js
+=======
+import "../App.css";
+import "bootstrap/dist/css/bootstrap.css";
+>>>>>>> 20fdc773e5a90afce51a88c20192af743a6452f8
 import { handleInitialData } from "../actions/shared";
 import Routes from "./Routes";
 import NavBar from "./NavBar";
