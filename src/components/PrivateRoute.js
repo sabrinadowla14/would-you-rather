@@ -6,7 +6,7 @@ import Dashboard from "./Dashboard";
 import LeaderBoard from "./LeaderBoard";
 import Login from "./Login";
 import NewQuestion from "./NewQuestion";
-import QuestionDetails from "./QuestionDetails";
+import VotesDetails from "./VotesDetails";
 import PageNotFound from "./PageNotFound";
 import Logout from "./Logout";
 import Navbar from "./NavBar";
@@ -22,7 +22,7 @@ function Routes(props) {
             <Route path="/" exact component={Dashboard} />
             <Route path="/leaderboard" exact component={LeaderBoard} />
             <Route path="/add" component={NewQuestion} />
-            <Route path="/questions/:id" component={QuestionDetails} />
+            <Route path="/questions/:id" component={VotesDetails} />
             <Route exact path="/logout" component={Logout} />
           </Fragment>
         )}

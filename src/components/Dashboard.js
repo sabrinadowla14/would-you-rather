@@ -5,14 +5,14 @@ import Question from "./Question";
 
 class Dashboard extends Component {
   state = {
-    answered: false
+    quesAns: false
   };
 
-  handleChangeAnswered = (e, answered) => {
+  handleChangeQAnswered = (e, quesAns) => {
     e.preventDefault();
 
     this.setState(() => ({
-      answered
+      quesAns
     }));
   };
 
@@ -32,27 +32,33 @@ class Dashboard extends Component {
 
     return (
       <div className="questions-list">
-        {this.state.answered === true ? (
+        {this.state.quesAns === true ? (
           <h3 className="center">Answered Questions</h3>
         ) : (
           <h3 className="center">Unanswered Questions</h3>
         )}
         <div className="btn-list-group">
-          <button className="btn" onClick={e => this.toggleAnswered(e, false)}>
+          <button
+            className="btn"
+            onClick={e => this.handleChangeQAnswered(e, false)}
+          >
             Unanswered
           </button>
-          <button className="btn" onClick={e => this.toggleAnswered(e, true)}>
+          <button
+            className="btn"
+            onClick={e => this.handleChangeQAnswered(e, true)}
+          >
             Answered
           </button>
         </div>
         <ul>
-          {this.state.answered
-            ? this.props.answeredQuestions.map(id => (
+          {this.state.quesAns
+            ? this.props.ansQuesIds.map(id => (
                 <li key={id}>
                   <Question id={id} />
                 </li>
               ))
-            : this.props.unansweredQuestions.map(id => (
+            : this.props.unansQuesIds.map(id => (
                 <li key={id}>
                   <Question id={id} />
                 </li>
@@ -66,14 +72,18 @@ class Dashboard extends Component {
 function mapStateToProps({ questions, users, authedUser }) {
   const user = users[authedUser];
 
-  const answeredQuestions = Object.keys(users[authedUser].answers).sort(
-    (a, b) => user.answers[b].timestamp - user.answers[a].timestamp
-  );
+  const ansQuesIds = authedUser
+    ? Object.keys(users[authedUser].answers).sort(
+        (a, b) =>
+          users[authedUser].answers[b].timestamp -
+          users[authedUser].answers[a].timestamp
+      )
+    : [];
   return {
-    unansweredQuestions: Object.keys(questions)
-      .filter(id => !answeredQuestions.includes(id))
+    unansQuesIds: Object.keys(questions)
+      .filter(qid => !ansQuesIds.includes(qid))
       .sort((a, b) => questions[b].timestamp - questions[a].timestamp),
-    answeredQuestions
+    ansQuesIds
   };
 }
 export default connect(mapStateToProps)(Dashboard);

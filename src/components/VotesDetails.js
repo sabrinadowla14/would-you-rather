@@ -15,41 +15,40 @@ import {
 import { connect } from "react-redux";
 import User from "./User";
 import { handleAddQuestionAnswer } from "../actions/shared";
-import PropTypes from "prop-types";
 
-class QuestionDetails extends PureComponent {
+class VotesDetails extends PureComponent {
   state = {
-    selectedOption: ""
+    optionChosen: ""
   };
 
   radioSelected = e => {
     this.setState({
-      selectedOption: e.target.value
+      optionChosen: e.target.value
     });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    this.props.saveQuestionAnswer(this.state.selectedOption);
+    this.props.quesAnsSaved(this.state.optionChosen);
   };
 
   render() {
     const {
       question,
-      questionAuthor,
+      authorQ,
       answer,
-      total,
-      percOne,
-      percTwo
+      totalVLength,
+      perOne,
+      perTwo
     } = this.props;
-    const { selectedOption } = this.state;
+    const { optionChosen } = this.state;
 
     return (
       <Row>
         <Col sm="12" md={{ size: 6, offset: 3 }}>
           <Card>
             <CardHeader>
-              <User id={questionAuthor.id} />
+              <User id={authorQ.id} />
             </CardHeader>
             <CardBody>
               <CardTitle>Would You Rather</CardTitle>
@@ -80,14 +79,16 @@ class QuestionDetails extends PureComponent {
                   <div className="progress">
                     <div
                       className="progress-one"
-                      style={{ width: `${percOne}%` }}
-                    >{`${percOne}%`}</div>
+                      style={{ width: `${perOne}%` }}
+                    >{`${perOne}%`}</div>
                     <div
                       className="progress-two"
-                      style={{ width: `${percTwo}%` }}
-                    >{`${percTwo}%`}</div>
+                      style={{ width: `${perTwo}%` }}
+                    >{`${perTwo}%`}</div>
                   </div>
-                  <div className="total">Total number of votes: {total}</div>
+                  <div className="totalVLength">
+                    Total number of votes: {totalVLength}
+                  </div>
                 </div>
               ) : (
                 <Form onSubmit={this.handleSubmit}>
@@ -107,7 +108,7 @@ class QuestionDetails extends PureComponent {
                       <Label>
                         <Input
                           type="radio"
-                          name="radio1"
+                          name="myRadios"
                           value="optionTwo"
                           onChange={this.radioSelected}
                         />{" "}
@@ -115,7 +116,7 @@ class QuestionDetails extends PureComponent {
                       </Label>
                     </FormGroup>
                   </FormGroup>
-                  <Button disabled={selectedOption === ""}>Submit</Button>
+                  <Button disabled={optionChosen === ""}>Submit</Button>
                 </Form>
               )}
             </CardBody>
@@ -126,29 +127,36 @@ class QuestionDetails extends PureComponent {
   }
 }
 
-function financial(x) {
-  return Number.parseFloat(x).toFixed(2);
+function calculation(y) {
+  return Number.parseFloat(y).toFixed(2);
 }
 
 function mapStateToProps({ questions, users, authedUser }, { match }) {
-  const answers = users[authedUser].answers;
-  let answer, percOne, percTwo, total;
+  let perOne, perTwo, totalVLength, answer;
+  const user = users[authedUser];
+  const answers = authedUser ? users[authedUser].answers : [];
+
   const { id } = match.params;
   const question = questions[id];
-  if (answers.hasOwnProperty(question.id)) {
-    answer = answers[question.id];
+  if (answers.hasOwnProperty(questions[id].id)) {
+    answer = answers[questions[id].id];
   }
-  const questionAuthor = users[question.author];
-  total = question.optionOne.votes.length + question.optionTwo.votes.length;
-  percOne = financial((question.optionOne.votes.length / total) * 100);
-  percTwo = financial((question.optionTwo.votes.length / total) * 100);
+  const authorQ = users[questions[id].author];
+  totalVLength =
+    question.optionOne.votes.length + question.optionTwo.votes.length;
+  perOne = calculation(
+    (questions[id].optionOne.votes.length / totalVLength) * 100
+  );
+  perTwo = calculation(
+    (questions[id].optionTwo.votes.length / totalVLength) * 100
+  );
   return {
     question,
-    questionAuthor,
+    authorQ,
     answer,
-    total,
-    percOne,
-    percTwo
+    totalVLength,
+    perOne,
+    perTwo
   };
 }
 
@@ -156,10 +164,10 @@ function mapDispatchToProps(dispatch, props) {
   const { id } = props.match.params;
 
   return {
-    saveQuestionAnswer: answer => {
-      dispatch(handleAddQuestionAnswer(id, answer));
+    quesAnsSaved: ans => {
+      dispatch(handleAddQuestionAnswer(id, ans));
     }
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(VotesDetails);

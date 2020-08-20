@@ -1,17 +1,34 @@
-import { RECEIVE_USERS } from "../actions/users";
+import {
+  RECEIVE_USERS,
+  ADD_USER_QUESTION,
+  ADD_USER_QUESTION_ANSWER
+} from "../actions/users";
 
-/* When the case is RECEIVE_USER the state is going to be everything
-which is an empty object now ...state, we are going to grab all
-the users from the action using action.users. default state is going to
-return the state       */
 export default function users(state = {}, action) {
   switch (action.type) {
+    case ADD_USER_QUESTION_ANSWER:
+      return {
+        ...state,
+        [action.auth]: {
+          ...state[action.auth],
+          answers: {
+            ...state[action.auth].answers,
+            [action.qid]: action.option
+          }
+        }
+      };
     case RECEIVE_USERS:
-      // when we receive user or tweets we want to merge all of those users or tweets
-      //onto this object
       return {
         ...state,
         ...action.users
+      };
+    case ADD_USER_QUESTION:
+      return {
+        ...state,
+        [action.authedUser]: {
+          ...state[action.authedUser],
+          questions: state[action.authedUser].questions.concat([action.qid])
+        }
       };
     default:
       return state;

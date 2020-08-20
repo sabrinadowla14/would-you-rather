@@ -19,12 +19,12 @@ export function addUserQuestion(authedUser, id) {
   };
 }
 
-export function addUserQuestionAnswer(authedUser, qid, answer) {
+export function addUserQuestionAnswer(qid, answer, authedUser) {
   return {
     type: ADD_USER_QUESTION_ANSWER,
-    authedUser,
     qid,
-    answer
+    answer,
+    authedUser
   };
 }
 

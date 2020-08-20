@@ -1,6 +1,5 @@
 import React, { PureComponent, Fragment } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 
 class User extends PureComponent {
   render() {
@@ -17,10 +16,6 @@ class User extends PureComponent {
     );
   }
 }
-
-User.propTypes = {
-  user: PropTypes.object.isRequired
-};
 
 function mapStateToProps({ users }, { id }) {
   return {

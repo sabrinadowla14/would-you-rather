@@ -2,6 +2,7 @@ import { saveQuestionAnswer, saveQuestion } from "../utils/api";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 import { getQuestions } from "../utils/api";
 import { handleInitialData } from "./shared";
+import { addUserQuestionAnswer } from "./users";
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
 export const ADD_QUESTION_ANSWER = "ADD_QUESTION_ANSWER";
@@ -58,15 +59,16 @@ export function handleAddQuestionAnswer(qid, answer) {
       answer,
       authedUser
     })
-      .then(() =>
+      .then(() => {
         dispatch(
           addQuestionAnswer({
             qid,
             answer,
             authedUser
           })
-        )
-      )
+        );
+        dispatch(addUserQuestionAnswer(qid, answer, authedUser));
+      })
       .then(() => dispatch(hideLoading()));
   };
 }
