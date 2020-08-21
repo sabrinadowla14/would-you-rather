@@ -20,7 +20,7 @@ export function handleInitialData() {
     dispatch(showLoading());
     return getInitialData().then(({ users, questions }) => {
       dispatch(receiveUsers(users));
-      dispatch(addQuestion(questions));
+      dispatch(receiveQuestions(questions));
       dispatch(hideLoading());
     });
   };
