@@ -2,19 +2,20 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, CardBody, CardTitle } from "reactstrap";
 import { withRouter } from "react-router-dom";
+//import { VotesDetails } from "./VotesDetails";
 
 class Question extends Component {
   constuctor() {
     this.quesInfo = this.routeChange.bind(this);
   }
-  quesInfo(e, qId) {
-    let path = `/questions/` + qId;
+  quesInfo(e, id) {
+    let path = `/questions/` + id;
     this.props.history.push(path);
   }
   render() {
-    const { question, authUser } = this.props;
+    const { question, authUser, id } = this.props;
     return (
-      <Card onClick={e => this.quesInfo(e, question.id)}>
+      <Card onClick={e => this.quesInfo(e, id)}>
         <CardBody>
           <CardTitle>Would You Rather</CardTitle>
           <ul>
@@ -46,7 +47,8 @@ class Question extends Component {
 function mapStateToProps(state, { id }) {
   return {
     question: state.questions[id],
-    authUser: state.authedUser
+    authUser: state.authedUser,
+    id
   };
 }
 

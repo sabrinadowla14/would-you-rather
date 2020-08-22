@@ -9,8 +9,7 @@ import NewQuestion from "./NewQuestion";
 import VotesDetails from "./VotesDetails";
 import PageNotFound from "./PageNotFound";
 import Logout from "./Logout";
-import Navbar from "./NavBar";
-
+//import NavBar from "./NavBar";
 function Routes(props) {
   return (
     <div className="container">

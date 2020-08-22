@@ -139,7 +139,7 @@ function mapStateToProps({ questions, users, authedUser }, { match }) {
   const { id } = match.params;
   const question = questions[id];
   if (answers.hasOwnProperty(questions[id].id)) {
-    answer = answers[questions[id].id];
+    answer = answers[question.id];
   }
   const authorQ = users[questions[id].author];
   totalVLength =

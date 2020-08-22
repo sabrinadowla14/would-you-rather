@@ -1,69 +1,78 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+//import { Redirect } from "react-router-dom";
 import Question from "./Question";
+import {
+  TabContent,
+  TabPane,
+  Nav,
+  NavItem,
+  NavLink,
+  Row,
+  Col
+} from "reactstrap";
+import classnames from "classnames";
 
 class Dashboard extends Component {
   state = {
-    quesAns: false
+    activeTab: "1"
   };
 
-  handleChangeQAnswered = (e, quesAns) => {
-    e.preventDefault();
-
-    this.setState(() => ({
-      quesAns
-    }));
-  };
+  toggle(tab) {
+    if (this.state.activeTab !== tab) {
+      this.setState({
+        activeTab: tab
+      });
+    }
+  }
 
   render() {
-    if (!this.props.authedUser) {
-      return (
-        <Redirect
-          to={{
-            pathname: "/login",
-            state: {
-              returnPath: "/"
-            }
-          }}
-        />
-      );
-    }
-
+    const { unansQuesIds, ansQuesIds } = this.props;
     return (
-      <div className="questions-list">
-        {this.state.quesAns === true ? (
-          <h3 className="center">Answered Questions</h3>
-        ) : (
-          <h3 className="center">Unanswered Questions</h3>
-        )}
-        <div className="btn-list-group">
-          <button
-            className="btn"
-            onClick={e => this.handleChangeQAnswered(e, false)}
-          >
-            Unanswered
-          </button>
-          <button
-            className="btn"
-            onClick={e => this.handleChangeQAnswered(e, true)}
-          >
-            Answered
-          </button>
-        </div>
-        <ul>
-          {this.state.quesAns
-            ? this.props.ansQuesIds.map(id => (
-                <li key={id}>
-                  <Question id={id} />
-                </li>
-              ))
-            : this.props.unansQuesIds.map(id => (
-                <li key={id}>
-                  <Question id={id} />
-                </li>
+      <div>
+        <Nav tabs>
+          <NavItem>
+            <NavLink
+              className={classnames({ active: this.state.activeTab === "1" })}
+              onClick={() => {
+                this.toggle("1");
+              }}
+            >
+              Unanswered
+            </NavLink>
+          </NavItem>
+          <NavItem>
+            <NavLink
+              className={classnames({ active: this.state.activeTab === "2" })}
+              onClick={() => {
+                this.toggle("2");
+              }}
+            >
+              Answered
+            </NavLink>
+          </NavItem>
+        </Nav>
+
+        <TabContent activeTab={this.state.activeTab}>
+          <TabPane tabId="1">
+            <Row>
+              {unansQuesIds.map(qid => (
+                <Col key={qid} sm="6" md="4">
+                  <Question id={qid} />
+                </Col>
               ))}
-        </ul>
+            </Row>
+          </TabPane>
+          <TabPane tabId="2">
+            <Row>
+              {ansQuesIds.map(qid => (
+                <Col key={qid} sm="6" md="4">
+                  <Question id={qid} />
+                </Col>
+              ))}
+            </Row>
+          </TabPane>
+        </TabContent>
       </div>
     );
   }

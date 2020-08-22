@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Label, Row, Col } from "reactstrap";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
+
 import { setAuthedUser } from "../actions/authedUser";
 import { Redirect } from "react-router-dom";
 

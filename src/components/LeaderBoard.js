@@ -1,20 +1,20 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { Table } from "reactstrap";
-import PropTypes from "prop-types";
-
+import NavBar from "./NavBar";
 function Leaderboard(props) {
   const { users } = props;
   return (
     <Fragment>
+      <NavBar />
       <Table>
-        <thead>
-          <tr>
-            <th>Rank</th>
-            <th>Profile</th>
-            <th>User</th>
-            <th>Questions Asked</th>
-            <th>Questions Answered</th>
+        <thead className="userInfo">
+          <tr className="userInfo">
+            <th>User Id</th>
+            <th>Users Images</th>
+            <th>Users Name</th>
+            <th>No of Questions Asked</th>
+            <th>Answered Questions</th>
           </tr>
         </thead>
         <tbody>
@@ -38,10 +38,6 @@ function Leaderboard(props) {
     </Fragment>
   );
 }
-
-Leaderboard.propTypes = {
-  users: PropTypes.array.isRequired
-};
 
 const mapStateToProps = ({ users }) => {
   const userScore = user =>

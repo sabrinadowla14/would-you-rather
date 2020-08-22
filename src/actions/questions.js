@@ -1,7 +1,7 @@
 import { saveQuestionAnswer, saveQuestion } from "../utils/api";
 import { showLoading, hideLoading } from "react-redux-loading-bar";
 import { getQuestions } from "../utils/api";
-import { handleInitialData } from "./shared";
+
 import { addUserQuestionAnswer } from "./users";
 
 export const RECEIVE_QUESTIONS = "RECEIVE_QUESTIONS";
@@ -41,7 +41,7 @@ export function receiveQuestions(questions) {
 export function addQuestionAnswer({ qid, answer, authedUser }) {
   return {
     type: ADD_QUESTION_ANSWER,
-    ansInfo: {
+    answerInfo: {
       qid,
       answer,
       authedUser
