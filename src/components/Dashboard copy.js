@@ -18,13 +18,13 @@ class Dashboard extends Component {
     activeTab: "1"
   };
 
-  handleTabToggle = tab => {
+  toggle(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab
       });
     }
-  };
+  }
 
   render() {
     const { unansQuesIds, ansQuesIds } = this.props;
@@ -35,7 +35,7 @@ class Dashboard extends Component {
             <NavLink
               className={classnames({ active: this.state.activeTab === "1" })}
               onClick={() => {
-                this.handleTabToggle("1");
+                this.toggle("1");
               }}
             >
               Unanswered
@@ -45,7 +45,7 @@ class Dashboard extends Component {
             <NavLink
               className={classnames({ active: this.state.activeTab === "2" })}
               onClick={() => {
-                this.handleTabToggle("2");
+                this.toggle("2");
               }}
             >
               Answered
@@ -57,7 +57,7 @@ class Dashboard extends Component {
           <TabPane tabId="1">
             <Row>
               {unansQuesIds.map(qid => (
-                <Col key={qid} sm="8" md="4">
+                <Col key={qid} sm="6" md="4">
                   <Question id={qid} />
                 </Col>
               ))}
@@ -66,7 +66,7 @@ class Dashboard extends Component {
           <TabPane tabId="2">
             <Row>
               {ansQuesIds.map(qid => (
-                <Col key={qid} sm="8" md="4">
+                <Col key={qid} sm="6" md="4">
                   <Question id={qid} />
                 </Col>
               ))}

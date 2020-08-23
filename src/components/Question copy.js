@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, CardBody, CardTitle } from "reactstrap";
 import { withRouter, Link } from "react-router-dom";
-import { VotesDetails } from "./VotesDetails";
+//import { VotesDetails } from "./VotesDetails";
 
 class Question extends Component {
   constuctor() {
-    this.quesInfo = this.quesInfo.bind(this);
+    this.quesInfo = this.routeChange.bind(this);
   }
   quesInfo(e, id) {
     let path = `/questions/` + id;
@@ -17,7 +17,7 @@ class Question extends Component {
     return (
       <Card onClick={e => this.quesInfo(e, id)}>
         <CardBody>
-          <CardTitle>Would You Rather?...</CardTitle>
+          <CardTitle>Would You Rather</CardTitle>
           <ul>
             <li
               className={
@@ -38,9 +38,9 @@ class Question extends Component {
               {question.optionTwo.text}
             </li>
           </ul>
-          <div className="path-info">
+          <div className="ques-path">
             <Link to={`/question/${id}`}>
-              <button className="btnVote">Vote Please</button>
+              <button className="btn-vote">Vote Please</button>
             </Link>
           </div>
         </CardBody>
