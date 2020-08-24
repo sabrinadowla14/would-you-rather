@@ -1,40 +1,53 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
-import { Table } from "reactstrap";
+import { Row, Col, Container } from "reactstrap";
 import NavBar from "./NavBar";
+import "../css/leaderboard.css";
+
 function Leaderboard(props) {
   const { users } = props;
   return (
     <Fragment>
       <NavBar />
-      <Table>
-        <thead className="userInfo">
-          <tr className="userInfo">
-            <th>User Id</th>
-            <th>Users Images</th>
-            <th>Users Name</th>
-            <th>No of Questions Asked</th>
-            <th>Answered Questions</th>
-          </tr>
-        </thead>
-        <tbody>
-          {users.map((user, index) => (
-            <tr key={user.id}>
-              <td>{index + 1}</td>
-              <td>
-                <img
-                  src={user.avatarURL}
-                  className="avatar"
-                  alt={`Avatar of ${user.name}`}
-                />
-              </td>
-              <td>{user.name}</td>
-              <td>{user.questions.length}</td>
-              <td>{Object.keys(user.answers).length}</td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
+      <h2 className="text-center my-3">
+        <b>LeaderBoard</b>
+      </h2>
+      <Container>
+        <Row>
+          <Col xs={6} md={3}>
+            Users Images
+          </Col>
+          <Col xs={6} md={3}>
+            Users Name
+          </Col>
+          <Col xs={6} md={3}>
+            No of Questions Asked
+          </Col>
+          <Col xs={6} md={3}>
+            Answered Questions
+          </Col>
+        </Row>
+        {users.map((user, index) => (
+          <Row key={user.id}>
+            <Col xs={6} md={3}>
+              <img
+                src={user.avatarURL}
+                className="avatar"
+                alt={`Avatar of ${user.name}`}
+              />
+            </Col>
+            <Col xs={6} md={3}>
+              {user.name}
+            </Col>
+            <Col xs={6} md={3}>
+              {user.questions.length}
+            </Col>
+            <Col xs={6} md={3}>
+              {Object.keys(user.answers).length}
+            </Col>
+          </Row>
+        ))}
+      </Container>
     </Fragment>
   );
 }

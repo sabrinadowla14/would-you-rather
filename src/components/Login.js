@@ -1,13 +1,14 @@
 import React, { Component } from "react";
-import { Label, Row, Col } from "reactstrap";
+import { Label, Row, Col, Form } from "reactstrap";
 import { connect } from "react-redux";
-
+import "../css/login.css";
 import { setAuthedUser } from "../actions/authedUser";
 import { Redirect } from "react-router-dom";
 
 class Login extends Component {
   state = {
-    userId: ""
+    userId: "",
+    errMsg: ""
   };
 
   handleChange = e => {
@@ -18,32 +19,36 @@ class Login extends Component {
   };
 
   handleSubmitBtn = e => {
-    const { userId } = this.state;
+    const { userId, errMsg } = this.state;
 
-    const { authedUser } = this.props;
+    const { selectAuthedUser } = this.props;
 
     if (userId) {
-      authedUser(userId);
+      selectAuthedUser(userId);
+    } else {
+      this.setState({ errMsg: "Please select a User!!" });
     }
+
     e.preventDefault();
   };
 
   render() {
     const { users } = this.props;
-    const { userId } = this.state;
+    const { userId, errMsg } = this.state;
 
-    if (this.props.authedUser === true) {
-      return <Redirect to={`/questions/${this.props.id}`} />;
+    if (this.props.selectAuthedUser === true) {
+      return <Redirect to={`/questions/${this.state.userId}`} />;
     }
     return (
       <Row>
-        <Col sm="6" md={{ size: 4, offset: 5 }}>
-          <form id="Login" onSubmit={this.handleSubmitBtn}>
+        <Col sm="8" md={{ size: 4, offset: 4 }}>
+          <form id="login-info" onSubmit={this.handleSubmitBtn}>
                             
             <div className="form-group">
               <h3>Welcome to Would you Rather</h3>
               <Label for="selectUserOpt">Drop-Down to select User:</Label>
-                                
+                {errMsg ? <p className="text-danger">{errMsg}</p> : null}
+                              
               <select
                 className="form-control"
                 id="userId"
@@ -55,7 +60,6 @@ class Login extends Component {
                   return (
                     <option key={users[user].id} value={users[user].id}>
                                                 {users[user].name}
-                                              
                     </option>
                   );
                 })}
@@ -66,7 +70,7 @@ class Login extends Component {
                             
             <button
               type="submit"
-              className="btn btn-primary"
+              id="loginBtn"
               disabled={this.state.userId === ""}
             >
                                 Login                 
@@ -87,7 +91,7 @@ function mapStateToProps({ users }) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    authedUser: id => {
+    selectAuthedUser: id => {
       dispatch(setAuthedUser(id));
     }
   };

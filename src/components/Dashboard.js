@@ -38,7 +38,7 @@ class Dashboard extends Component {
                 this.handleTabToggle("1");
               }}
             >
-              Unanswered
+              Unanswered Questions
             </NavLink>
           </NavItem>
           <NavItem>
@@ -48,7 +48,7 @@ class Dashboard extends Component {
                 this.handleTabToggle("2");
               }}
             >
-              Answered
+              Answered Questions
             </NavLink>
           </NavItem>
         </Nav>

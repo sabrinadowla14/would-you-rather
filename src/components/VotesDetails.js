@@ -1,4 +1,4 @@
-import React, { PureComponent } from "react";
+import React, { Component } from "react";
 import {
   Card,
   CardHeader,
@@ -16,18 +16,18 @@ import { connect } from "react-redux";
 import User from "./User";
 import { handleAddQuestionAnswer } from "../actions/shared";
 
-class VotesDetails extends PureComponent {
+class VotesDetails extends Component {
   state = {
     optionChosen: ""
   };
 
-  radioSelected = e => {
+  setVoteOption = e => {
     this.setState({
       optionChosen: e.target.value
     });
   };
 
-  handleSubmit = e => {
+  handleSaveSubmit = e => {
     e.preventDefault();
     this.props.quesAnsSaved(this.state.optionChosen);
   };
@@ -38,8 +38,8 @@ class VotesDetails extends PureComponent {
       authorQ,
       answer,
       totalVLength,
-      perOne,
-      perTwo
+      calOptOne,
+      calOptTwo
     } = this.props;
     const { optionChosen } = this.state;
 
@@ -79,19 +79,25 @@ class VotesDetails extends PureComponent {
                   <div className="progress">
                     <div
                       className="progress-one"
-                      style={{ width: `${perOne}%` }}
-                    >{`${perOne}%`}</div>
+                      style={{
+                        width: `${calOptOne}%`,
+                        height: `${calOptOne}%`
+                      }}
+                    >{`${calOptOne}%`}</div>
                     <div
                       className="progress-two"
-                      style={{ width: `${perTwo}%` }}
-                    >{`${perTwo}%`}</div>
+                      style={{
+                        width: `${calOptTwo}%`,
+                        height: `${calOptTwo}%`
+                      }}
+                    >{`${calOptTwo}%`}</div>
                   </div>
                   <div className="totalVLength">
-                    Total number of votes: {totalVLength}
+                    Total Votes: {totalVLength}
                   </div>
                 </div>
               ) : (
-                <Form onSubmit={this.handleSubmit}>
+                <Form onSubmit={this.handleSaveSubmit}>
                   <FormGroup tag="fieldset">
                     <FormGroup>
                       <Label>
@@ -99,7 +105,7 @@ class VotesDetails extends PureComponent {
                           type="radio"
                           name="radio1"
                           value="optionOne"
-                          onChange={this.radioSelected}
+                          onChange={this.setVoteOption}
                         />{" "}
                         {question.optionOne.text}
                       </Label>
@@ -110,7 +116,7 @@ class VotesDetails extends PureComponent {
                           type="radio"
                           name="myRadios"
                           value="optionTwo"
-                          onChange={this.radioSelected}
+                          onChange={this.setVoteOption}
                         />{" "}
                         {question.optionTwo.text}
                       </Label>
@@ -127,10 +133,6 @@ class VotesDetails extends PureComponent {
   }
 }
 
-function calculation(y) {
-  return Number.parseFloat(y).toFixed(2);
-}
-
 function mapStateToProps({ questions, users, authedUser }, { match }) {
   let perOne, perTwo, totalVLength, answer;
   const user = users[authedUser];
@@ -144,19 +146,19 @@ function mapStateToProps({ questions, users, authedUser }, { match }) {
   const authorQ = users[questions[id].author];
   totalVLength =
     question.optionOne.votes.length + question.optionTwo.votes.length;
-  perOne = calculation(
-    (questions[id].optionOne.votes.length / totalVLength) * 100
-  );
-  perTwo = calculation(
-    (questions[id].optionTwo.votes.length / totalVLength) * 100
-  );
+  const quesOneVotesLen =
+    (questions[id].optionOne.votes.length / totalVLength) * 100;
+  const calOptOne = Number.parseFloat(quesOneVotesLen).toFixed(2);
+  const quesTwoVotesLen =
+    (questions[id].optionTwo.votes.length / totalVLength) * 100;
+  const calOptTwo = Number.parseFloat(quesTwoVotesLen).toFixed(2);
   return {
     question,
     authorQ,
     answer,
     totalVLength,
-    perOne,
-    perTwo
+    calOptOne,
+    calOptTwo
   };
 }
 
