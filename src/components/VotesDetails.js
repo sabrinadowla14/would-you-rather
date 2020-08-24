@@ -15,6 +15,7 @@ import {
 import { connect } from "react-redux";
 import User from "./User";
 import { handleAddQuestionAnswer } from "../actions/shared";
+import "../css/voteDetails.css";
 
 class VotesDetails extends Component {
   state = {
@@ -76,19 +77,17 @@ class VotesDetails extends Component {
                       </Label>
                     </FormGroup>
                   </FormGroup>
-                  <div className="progress">
+                  <div className="prog-bar">
                     <div
-                      className="progress-one"
+                      className="prog-one"
                       style={{
-                        width: `${calOptOne}%`,
-                        height: `${calOptOne}%`
+                        width: `${calOptOne}%`
                       }}
                     >{`${calOptOne}%`}</div>
                     <div
-                      className="progress-two"
+                      className="prog-two"
                       style={{
-                        width: `${calOptTwo}%`,
-                        height: `${calOptTwo}%`
+                        width: `${calOptTwo}%`
                       }}
                     >{`${calOptTwo}%`}</div>
                   </div>
@@ -103,7 +102,7 @@ class VotesDetails extends Component {
                       <Label>
                         <Input
                           type="radio"
-                          name="radio1"
+                          name="opt-radio"
                           value="optionOne"
                           onChange={this.setVoteOption}
                         />{" "}
@@ -114,7 +113,7 @@ class VotesDetails extends Component {
                       <Label>
                         <Input
                           type="radio"
-                          name="myRadios"
+                          name="opt-radio"
                           value="optionTwo"
                           onChange={this.setVoteOption}
                         />{" "}
@@ -140,8 +139,8 @@ function mapStateToProps({ questions, users, authedUser }, { match }) {
 
   const { id } = match.params;
   const question = questions[id];
-  if (answers.hasOwnProperty(questions[id].id)) {
-    answer = answers[question.id];
+  if (user.answers.hasOwnProperty(questions[id].id)) {
+    answer = user.answers[question.id];
   }
   const authorQ = users[questions[id].author];
   totalVLength =
@@ -158,7 +157,8 @@ function mapStateToProps({ questions, users, authedUser }, { match }) {
     answer,
     totalVLength,
     calOptOne,
-    calOptTwo
+    calOptTwo,
+    id
   };
 }
 

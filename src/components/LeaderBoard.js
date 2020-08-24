@@ -8,7 +8,6 @@ function Leaderboard(props) {
   const { users } = props;
   return (
     <Fragment>
-      <NavBar />
       <h2 className="text-center my-3">
         <b>LeaderBoard</b>
       </h2>

@@ -8,14 +8,14 @@ class Question extends Component {
   constuctor() {
     this.quesInfo = this.quesInfo.bind(this);
   }
-  quesInfo(e, id) {
-    let path = `/questions/` + id;
+  quesInfo(e, question_id) {
+    let path = `/questions/` + question_id;
     this.props.history.push(path);
   }
   render() {
-    const { question, authUser, id } = this.props;
+    const { question, authUser, question_id } = this.props;
     return (
-      <Card onClick={e => this.quesInfo(e, id)}>
+      <Card onClick={e => this.quesInfo(e, question_id)}>
         <CardBody>
           <CardTitle>Would You Rather?...</CardTitle>
           <ul>
@@ -39,7 +39,7 @@ class Question extends Component {
             </li>
           </ul>
           <div className="path-info">
-            <Link to={`/question/${id}`}>
+            <Link to={`/question/${question_id}`}>
               <button className="btnVote">Vote Please</button>
             </Link>
           </div>
@@ -50,10 +50,11 @@ class Question extends Component {
 }
 
 function mapStateToProps(state, { id }) {
+  const question = state.questions[id];
   return {
-    question: state.questions[id],
+    question_id: state.questions[id].id,
     authUser: state.authedUser,
-    id
+    question
   };
 }
 

@@ -20,7 +20,13 @@ Contents are taken from [React Nanodegree program](https://www.udacity.com/cours
 [navbar](https://react-bootstrap.github.io/components/navbar/).
 
 [tabs](https://reactstrap.github.io/components/tabs/)
+
 [progress](https://react-bootstrap.github.io/components/progress/)
+
 [alerts](https://reactstrap.github.io/components/alerts/)
+
 [navs](https://react-bootstrap.github.io/components/navs/)
-[progress-bar](https://dev.to/ramonak/react-how-to-create-a-custom-progress-bar-component-in-5-minutes-2lcl)
+
+[progress-bar](https://dev.to/ramonak/[progressbar]react-how-to-create-a-custom-progress-bar-component-in-5-minutes-2lcl)
+
+[radio]https://magnusbenoni.com/radio-buttons-react/
