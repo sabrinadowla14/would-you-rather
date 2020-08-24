@@ -9,13 +9,11 @@ import {
 } from "reactstrap";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import React, { PureComponent, Fragment } from "react";
+import React, { Component, Fragment } from "react";
 import User from "./User";
-//import LeaderBoard from "./LeaderBoard";
-//import unsetAuthedUser from "../actions/authedUser";
-//import Logout from "./Logout";
+import "../css/navbar.css";
 
-class NavBar extends PureComponent {
+class NavBar extends Component {
   state = {
     isOpen: false
   };

@@ -16,6 +16,7 @@ import { connect } from "react-redux";
 import User from "./User";
 import { handleAddQuestionAnswer } from "../actions/shared";
 import "../css/voteDetails.css";
+import PageNotFound from "./PageNotFound";
 
 class VotesDetails extends Component {
   state = {
@@ -147,10 +148,11 @@ function mapStateToProps({ questions, users, authedUser }, { match }) {
     question.optionOne.votes.length + question.optionTwo.votes.length;
   const quesOneVotesLen =
     (questions[id].optionOne.votes.length / totalVLength) * 100;
-  const calOptOne = Number.parseFloat(quesOneVotesLen).toFixed(2);
+  const calOptOne = Math.round(quesOneVotesLen);
   const quesTwoVotesLen =
     (questions[id].optionTwo.votes.length / totalVLength) * 100;
-  const calOptTwo = Number.parseFloat(quesTwoVotesLen).toFixed(2);
+  const calOptTwo = Math.round(quesTwoVotesLen);
+
   return {
     question,
     authorQ,
