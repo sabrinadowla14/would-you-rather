@@ -16,7 +16,11 @@ class User extends PureComponent {
                 alt={`Avatar of ${user.name}`}
               />
             </Col>
-            <Col xs={6} md={3}>
+            <Col
+              xs={6}
+              md={3}
+              style={{ color: "maroon", textDecoration: "none" }}
+            >
               {user.name}
             </Col>
           </Row>

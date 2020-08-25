@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Card, CardBody, CardTitle } from "reactstrap";
 import { withRouter, Link } from "react-router-dom";
 import { VotesDetails } from "./VotesDetails";
+import "../css/question.css";
 
 class Question extends Component {
   constuctor() {
@@ -13,26 +14,24 @@ class Question extends Component {
     this.props.history.push(path);
   }
   render() {
-    const { question, authUser, question_id } = this.props;
+    const { question, authedUser, question_id } = this.props;
     return (
       <Card onClick={e => this.quesInfo(e, question_id)}>
         <CardBody>
-          <CardTitle>Would You Rather?...</CardTitle>
+          <CardTitle style={{ color: "blue", textDecoration: "none" }}>
+            Would You Rather?...
+          </CardTitle>
           <ul>
             <li
               className={
-                question.optionOne.votes.includes(authUser)
-                  ? "optionSelected"
-                  : ""
+                question.optionOne.votes.includes(authedUser) ? "optSel" : ""
               }
             >
               {question.optionOne.text}
             </li>
             <li
               className={
-                question.optionTwo.votes.includes(authUser)
-                  ? "optionSelected"
-                  : ""
+                question.optionTwo.votes.includes(authedUser) ? "optSel" : ""
               }
             >
               {question.optionTwo.text}
@@ -53,7 +52,7 @@ function mapStateToProps(state, { id }) {
   const question = state.questions[id];
   return {
     question_id: state.questions[id].id,
-    authUser: state.authedUser,
+    authedUser: state.authedUser,
     question
   };
 }

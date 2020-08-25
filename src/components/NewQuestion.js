@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
 import {
   Button,
   Card,
@@ -20,20 +19,15 @@ class NewQuestion extends Component {
   state = {
     optionOne: "",
     optionTwo: "",
-    location: false
+    oriLocation: false
   };
 
-  handleOptionOneChange = e => {
+  handleInputOptChange = e => {
     e.preventDefault();
+    const name = e.target.name;
+    const value = e.target.value;
     this.setState({
-      optionOne: e.target.value
-    });
-  };
-
-  handleOptionTwoChange = e => {
-    e.preventDefault();
-    this.setState({
-      optionTwo: e.target.value
+      [name]: value
     });
   };
 
@@ -44,12 +38,12 @@ class NewQuestion extends Component {
     this.setState({
       optionOne: "",
       optionTwo: "",
-      location: true
+      oriLocation: true
     });
   };
 
   render() {
-    if (this.state.location) {
+    if (this.state.oriLocation) {
       return <Redirect to="/" />;
     }
     const { optionOne, optionTwo } = this.state;
@@ -58,7 +52,9 @@ class NewQuestion extends Component {
         <Col sm="12" md={{ size: 6, offset: 3 }}>
           <Card>
             <CardBody>
-              <CardTitle>Would You Rather</CardTitle>
+              <CardTitle style={{ color: "blue", textDecoration: "none" }}>
+                Would You Rather?...
+              </CardTitle>
               <Form onSubmit={this.handleOptionSubmit}>
                 <FormGroup>
                   <Label for="optionOne">Option One</Label>
@@ -66,7 +62,7 @@ class NewQuestion extends Component {
                     type="text"
                     name="optionOne"
                     value={optionOne}
-                    onChange={this.handleOptionOneChange}
+                    onChange={this.handleInputOptChange}
                     placeholder="Option One"
                   />
                 </FormGroup>
@@ -76,7 +72,7 @@ class NewQuestion extends Component {
                     type="text"
                     name="optionTwo"
                     value={optionTwo}
-                    onChange={this.handleOptionTwoChange}
+                    onChange={this.handleInputOptChange}
                     placeholder="Option Two"
                   />
                 </FormGroup>

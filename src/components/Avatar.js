@@ -7,8 +7,8 @@ function Avatar(props) {
       src={props.avatarURL}
       roundedCircle
       fluid
-      width="40"
-      height="40"
+      width="45"
+      height="45"
       className={props.className}
       alt="user avatar"
     />

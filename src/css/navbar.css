@@ -52,3 +52,13 @@ a {
 .green a {
   color: mediumseagreen;
 }
+
+.enavNwQ {
+  color: blue;
+}
+
+.navLink:hover {
+  border-bottom: 2px solid mediumvioletred;
+  background: #8db8dd;
+  cursor: pointer;
+}

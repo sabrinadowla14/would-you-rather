@@ -40,3 +40,8 @@
   margin-top: 5px;
   vertical-align: middle;
 }
+
+.optSel {
+  font-weight: bold;
+  color: blueviolet;
+}

@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  color: #33d3d3;
+  color: #697784;
 }
 
 a {
@@ -193,28 +193,6 @@ div.card {
   margin: 10px;
 }
 
-.progress {
-  margin-top: 25px;
-  width: 100%;
-  background: #000;
-  height: 25px;
-  display: inline-flex;
-  color: #e8f1e8;
-  font-size: 20px;
-}
-
-.progress-one {
-  height: 100%;
-  background: #808cfa;
-  text-align: center;
-}
-
-.progress-two {
-  height: 100%;
-  background: #fa8080;
-  text-align: center;
-}
-
 .total {
   margin-top: 25px;
   width: 100%;
@@ -242,19 +220,4 @@ a:hover {
 ul {
   list-style-type: circle;
   padding-inline-start: 0rem;
-}
-
-.loginBtn {
-  height: 45px;
-  background-color: rgb(219, 172, 144);
-  border-radius: 5px;
-  color: white;
-  font-weight: bold;
-  width: 60%;
-  margin: 12px auto;
-}
-
-.login-info {
-  background-color: blanchedalmond;
-  color: blue;
 }

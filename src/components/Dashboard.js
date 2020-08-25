@@ -33,6 +33,7 @@ class Dashboard extends Component {
         <Nav tabs>
           <NavItem>
             <NavLink
+              style={{ color: "blue", textDecoration: "none" }}
               className={classnames({ active: this.state.activeTab === "1" })}
               onClick={() => {
                 this.handleTabToggle("1");
@@ -43,6 +44,7 @@ class Dashboard extends Component {
           </NavItem>
           <NavItem>
             <NavLink
+              style={{ color: "blue", textDecoration: "none" }}
               className={classnames({ active: this.state.activeTab === "2" })}
               onClick={() => {
                 this.handleTabToggle("2");

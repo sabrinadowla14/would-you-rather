@@ -28,7 +28,7 @@ class App extends Component {
           <LoadingBar />
           <div>
             <NavBar />
-            {this.props.loading === true ? null : (
+            {this.props.loading === true ? null : notLoggedIn ? null : (
               <div>
                 <Route path="/" exact component={Login} />
                 <PrivateRoute path="/home" component={Dashboard} />

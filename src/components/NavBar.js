@@ -30,8 +30,12 @@ class NavBar extends Component {
     return (
       <div>
         <Navbar bg="primary" variant="dark" light expand="md">
-          <NavbarBrand tag={Link} to="/">
-            Would You Rather
+          <NavbarBrand
+            style={{ color: "maroon", textDecoration: "none" }}
+            tag={Link}
+            to="/"
+          >
+            Back To Home!!
           </NavbarBrand>
           {authedUser && (
             <Fragment>
@@ -39,12 +43,20 @@ class NavBar extends Component {
               <Collapse isOpen={this.state.isOpen} navbar>
                 <Nav className="ml-auto" navbar>
                   <NavItem>
-                    <NavLink tag={Link} to="/add">
+                    <NavLink
+                      style={{ color: "blue", textDecoration: "none" }}
+                      tag={Link}
+                      to="/add"
+                    >
                       New Question
                     </NavLink>
                   </NavItem>
                   <NavItem>
-                    <NavLink tag={Link} to="/leaderboard">
+                    <NavLink
+                      style={{ color: "blue", textDecoration: "none" }}
+                      tag={Link}
+                      to="/leaderboard"
+                    >
                       LeaderBoard
                     </NavLink>
                   </NavItem>
@@ -53,6 +65,7 @@ class NavBar extends Component {
                   </NavItem>
                   <NavItem>
                     <NavLink
+                      style={{ color: "blue", textDecoration: "none" }}
                       tag={Link}
                       to="/logout"
                       onClick={this.props.handleLogout}
