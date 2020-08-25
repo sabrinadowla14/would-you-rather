@@ -49,6 +49,6 @@ Contents are taken from [React Nanodegree program](https://www.udacity.com/cours
 
 [progress-bar](https://dev.to/ramonak/[progressbar]react-how-to-create-a-custom-progress-bar-component-in-5-minutes-2lcl)
 
-[radio]https://magnusbenoni.com/radio-buttons-react/
+[radio](https://magnusbenoni.com/radio-buttons-react/)
 
-[name-value] https://medium.com/@bretdoucette/understanding-this-setstate-name-value-a5ef7b4ea2b4
+[name-value](https://medium.com/@bretdoucette/understanding-this-setstate-name-value-a5ef7b4ea2b4)
