@@ -37,18 +37,19 @@ This project was bootstrapped with
 ## Aknowledgement:
 
 Contents are taken from [React Nanodegree program](https://www.udacity.com/course/react-nanodegree--nd019).
+
 [navbar](https://react-bootstrap.github.io/components/navbar/).
 
-[tabs](https://reactstrap.github.io/components/tabs/)
+[tabs](https://reactstrap.github.io/components/tabs/).
 
-[progress](https://react-bootstrap.github.io/components/progress/)
+[progress](https://react-bootstrap.github.io/components/progress/).
 
-[alerts](https://reactstrap.github.io/components/alerts/)
+[alerts](https://reactstrap.github.io/components/alerts/).
 
-[navs](https://react-bootstrap.github.io/components/navs/)
+[navs](https://react-bootstrap.github.io/components/navs/).
 
-[progress-bar](https://dev.to/ramonak/[progressbar]react-how-to-create-a-custom-progress-bar-component-in-5-minutes-2lcl)
+[progress-bar](https://dev.to/ramonak/[progressbar]react-how-to-create-a-custom-progress-bar-component-in-5-minutes-2lcl).
 
-[radio](https://magnusbenoni.com/radio-buttons-react/)
+[radio](https://magnusbenoni.com/radio-buttons-react/).
 
-[name-value](https://medium.com/@bretdoucette/understanding-this-setstate-name-value-a5ef7b4ea2b4)
+[name-value](https://medium.com/@bretdoucette/understanding-this-setstate-name-value-a5ef7b4ea2b4).
