@@ -53,7 +53,7 @@ class VotesDetails extends Component {
               <User id={authorQ.id} />
             </CardHeader>
             <CardBody>
-              <CardTitle>Would You Rather? Inside Answered</CardTitle>
+              <CardTitle>Would You Rather?...</CardTitle>
               {answer ? (
                 <div>
                   <FormGroup>

@@ -23,7 +23,7 @@ class Question extends Component {
     return (
       <Card onClick={e => this.quesInfo(e, question_id)}>
         <CardBody>
-          <CardTitle>Would You Rather? Inside Dashboard</CardTitle>
+          <CardTitle>Would You Rather?...</CardTitle>
           <ul>
             <li
               className={
