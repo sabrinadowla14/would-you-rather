@@ -1,12 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import PropTypes from "prop-types";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import LoadingBar from "react-redux-loading-bar";
 import { handleInitialData } from "../actions/shared";
-//import Routes from "./PrivateRoute";
-//import "bootstrap/dist/css/bootstrap.css";
-//import "../App.css";
+import "../App.css";
 import NavBar from "./NavBar";
 import Dashboard from "./Dashboard";
 import PrivateRoute from "./PrivateRoute";
@@ -20,7 +17,7 @@ class App extends Component {
     this.props.handleInitialData();
   }
   render() {
-    const { notLoggedIn, authedUser } = this.props;
+    const { userNotLoggedIn, authedUser } = this.props;
 
     return (
       <Router>
@@ -28,19 +25,11 @@ class App extends Component {
           <LoadingBar />
           <div>
             <NavBar />
-            {this.props.loading === true ? null : notLoggedIn ? null : (
+            {this.props.loading === true ? null : (
               <div>
-                <Route path="/" exact component={Login} />
-                <PrivateRoute path="/home" component={Dashboard} />
-                <PrivateRoute
-                  path="/question/:question_id"
-                  component={Question}
-                />
-                <PrivateRoute path="/add" component={NewQuestion} />
-                <PrivateRoute path="/leaderboard" component={Leaderboard} />
+                <PrivateRoute notLoggedIn={userNotLoggedIn} />
               </div>
-            )}{" "}
-            : {!authedUser ? <Login /> : <PrivateRoute />}
+            )}
           </div>
         </Fragment>
       </Router>
@@ -48,14 +37,9 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
-  handleInitialData: PropTypes.func.isRequired,
-  notLoggedIn: PropTypes.bool.isRequired
-};
-
 function mapStateToProps({ authedUser }) {
   return {
-    notLoggedIn: authedUser === null,
+    userNotLoggedIn: authedUser === null,
     authedUser
   };
 }

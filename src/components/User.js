@@ -17,11 +17,11 @@ class User extends PureComponent {
               />
             </Col>
             <Col
-              xs={6}
-              md={3}
-              style={{ color: "maroon", textDecoration: "none" }}
+              xs={8}
+              md={4}
+              style={{ color: "blue", textDecoration: "none" }}
             >
-              {user.name}
+              <p className="userName">{user.name} Asks: </p>
             </Col>
           </Row>
         </Container>

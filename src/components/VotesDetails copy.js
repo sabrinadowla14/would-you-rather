@@ -53,7 +53,7 @@ class VotesDetails extends Component {
               <User id={authorQ.id} />
             </CardHeader>
             <CardBody>
-              <CardTitle>Would You Rather? Inside Answered</CardTitle>
+              <CardTitle>Would You Rather?...</CardTitle>
               {answer ? (
                 <div>
                   <FormGroup>
@@ -122,29 +122,7 @@ class VotesDetails extends Component {
                       </Label>
                     </FormGroup>
                   </FormGroup>
-                  <div className="prog-bar">
-                    <div
-                      className="prog-one"
-                      style={{
-                        width: `${calOptOne}%`
-                      }}
-                    >{`${calOptOne}%`}</div>
-                    <div
-                      className="prog-two"
-                      style={{
-                        width: `${calOptTwo}%`
-                      }}
-                    >{`${calOptTwo}%`}</div>
-                  </div>
-                  <div className="totalVLength">
-                    Total Votes: {totalVLength}
-                  </div>
-                  <Button
-                    variant="outline-success"
-                    disabled={optionChosen === ""}
-                  >
-                    Vote
-                  </Button>
+                  <Button disabled={optionChosen === ""}>Submit</Button>
                 </Form>
               )}
             </CardBody>

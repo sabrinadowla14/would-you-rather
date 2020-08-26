@@ -4,8 +4,6 @@ import { Card, CardBody, CardTitle } from "reactstrap";
 import { withRouter, Link } from "react-router-dom";
 import { VotesDetails } from "./VotesDetails";
 import "../css/question.css";
-import PageNotFound from "./PageNotFound";
-import User from "./User";
 
 class Question extends Component {
   constuctor() {
@@ -16,21 +14,19 @@ class Question extends Component {
     this.props.history.push(path);
   }
   render() {
-    const { question, authedUser, question_id, authorQ, id } = this.props;
-    if (question === null) {
-      return <PageNotFound />;
-    }
+    const { question, authedUser, question_id } = this.props;
     return (
       <Card onClick={e => this.quesInfo(e, question_id)}>
         <CardBody>
-          <CardTitle>Would You Rather? Inside Dashboard</CardTitle>
+          <CardTitle style={{ color: "blue", textDecoration: "none" }}>
+            Would You Rather?...
+          </CardTitle>
           <ul>
             <li
               className={
                 question.optionOne.votes.includes(authedUser) ? "optSel" : ""
               }
             >
-              <User id={authorQ.id} />
               {question.optionOne.text}
             </li>
             <li
@@ -42,7 +38,9 @@ class Question extends Component {
             </li>
           </ul>
           <div className="path-info">
-            <button className="btnVote">View Questions</button>
+            <Link to={`/question/${question_id}`}>
+              <button className="btnVote">Vote Please</button>
+            </Link>
           </div>
         </CardBody>
       </Card>
@@ -52,14 +50,10 @@ class Question extends Component {
 
 function mapStateToProps(state, { id }) {
   const question = state.questions[id];
-  const user = state.users[state.users[state.authedUser]];
-  const authorQ = state.users[state.questions[id].author];
   return {
     question_id: state.questions[id].id,
     authedUser: state.authedUser,
-    question,
-    authorQ,
-    id
+    question
   };
 }
 
