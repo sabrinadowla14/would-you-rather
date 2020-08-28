@@ -58,7 +58,7 @@ export function handleAddQuestion(optionOneText, optionTwoText) {
       author
     }).then(question => {
       dispatch(addQuestion(question));
-      //dispatch(addUserQuestion(authedUser, question.id));
+      dispatch(addUserQuestion(authedUser, question.id));
       dispatch(hideLoading());
     });
   };
@@ -74,17 +74,16 @@ export function handleAddQuestionAnswer(qid, answer) {
       answer,
       authedUser
     })
-      .then(
-        () =>
-          dispatch(
-            addQuestionAnswer({
-              qid,
-              answer,
-              authedUser
-            })
-          )
-        //dispatch(addUserQuestionAnswer(qid, answer, authedUser))
-      )
+      .then(() => {
+        dispatch(
+          addQuestionAnswer({
+            qid,
+            answer,
+            authedUser
+          })
+        );
+        dispatch(addUserQuestionAnswer(qid, answer, authedUser));
+      })
       .then(() => dispatch(hideLoading()));
   };
 }

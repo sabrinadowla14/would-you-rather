@@ -213,7 +213,8 @@ export function _saveQuestionAnswer({ authedUser, qid, answer }) {
     }, 500);
   });
 }
-function formatUser({ username, name, avatarURL }) {
+
+/*function formatUser({ username, name, avatarURL }) {
   return {
     id: username,
     name,
@@ -221,4 +222,4 @@ function formatUser({ username, name, avatarURL }) {
     answers: [],
     questions: []
   };
-}
+}*/

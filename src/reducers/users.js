@@ -6,7 +6,7 @@ import {
 
 export default function users(state = {}, action) {
   switch (action.type) {
-    case ADD_USER_QUESTION_ANSWER:
+    /* case ADD_USER_QUESTION_ANSWER:
       return {
         ...state,
         [action.auth]: {
@@ -16,7 +16,21 @@ export default function users(state = {}, action) {
             [action.qid]: action.option
           }
         }
+      }; */
+
+    case ADD_USER_QUESTION_ANSWER:
+      return {
+        ...state,
+        [action.qid]: action.answer,
+
+        answers: {
+          ...state[action.authedUser].answers
+        },
+        [action.authedUser]: {
+          ...state[action.authedUser]
+        }
       };
+
     case RECEIVE_USERS:
       return {
         ...state,

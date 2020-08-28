@@ -3,9 +3,10 @@ import { connect } from "react-redux";
 import { Row, Col, Container } from "reactstrap";
 import NavBar from "./NavBar";
 import "../css/leaderboard.css";
+import Avatar from "./Avatar";
 
 function Leaderboard(props) {
-  const { users } = props;
+  const { users, userScore } = props;
   return (
     <Fragment>
       <h2 className="text-center my-3">
@@ -30,19 +31,19 @@ function Leaderboard(props) {
           <Row key={user.id}>
             <Col xs={6} md={3}>
               <img
-                src={user.avatarURL}
+                src={users[user.id].avatarURL}
                 className="avatar"
-                alt={`Avatar of ${user.name}`}
+                alt={`Avatar of ${users[user.id].name}`}
               />
             </Col>
             <Col xs={6} md={3}>
               {user.name}
             </Col>
             <Col xs={6} md={3}>
-              {user.questions.length}
+              {user.quesCreated}
             </Col>
             <Col xs={6} md={3}>
-              {Object.keys(user.answers).length}
+              {user.quesAns}
             </Col>
           </Row>
         ))}
@@ -52,10 +53,19 @@ function Leaderboard(props) {
 }
 
 const mapStateToProps = ({ users }) => {
-  const userScore = user =>
-    Object.keys(user.answers).length + user.questions.length;
+  const userScore = uid => {
+    return {
+      uid,
+      quesCreated: users[uid].questions.length,
+      quesAns: Object.keys(users[uid].answers).length
+    };
+  };
   return {
-    users: Object.values(users).sort((a, b) => userScore(b) - userScore(a))
+    users: Object.values(users).sort(
+      (a, b) => b.quesCreated + b.quesAns - (a.quesCreated + a.quesAns)
+    ),
+
+    userScore
   };
 };
 

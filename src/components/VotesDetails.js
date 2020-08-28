@@ -43,6 +43,9 @@ class VotesDetails extends Component {
       calOptOne,
       calOptTwo
     } = this.props;
+    if (question === null) {
+      return <PageNotFound />;
+    }
     const { optionChosen } = this.state;
 
     return (
@@ -122,23 +125,7 @@ class VotesDetails extends Component {
                       </Label>
                     </FormGroup>
                   </FormGroup>
-                  <div className="prog-bar">
-                    <div
-                      className="prog-one"
-                      style={{
-                        width: `${calOptOne}%`
-                      }}
-                    >{`${calOptOne}%`}</div>
-                    <div
-                      className="prog-two"
-                      style={{
-                        width: `${calOptTwo}%`
-                      }}
-                    >{`${calOptTwo}%`}</div>
-                  </div>
-                  <div className="totalVLength">
-                    Total Votes: {totalVLength}
-                  </div>
+
                   <Button
                     variant="outline-success"
                     disabled={optionChosen === ""}
@@ -155,8 +142,12 @@ class VotesDetails extends Component {
   }
 }
 
+function quesCal(x) {
+  return Number.parseFloat(x).toFixed(2);
+}
+
 function mapStateToProps({ questions, users, authedUser }, { match }) {
-  let perOne, perTwo, totalVLength, answer;
+  let calOptOne, calOptTwo, totalVLength, answer;
   const user = users[authedUser];
   const answers = authedUser ? users[authedUser].answers : [];
 
@@ -170,10 +161,11 @@ function mapStateToProps({ questions, users, authedUser }, { match }) {
     question.optionOne.votes.length + question.optionTwo.votes.length;
   const quesOneVotesLen =
     (questions[id].optionOne.votes.length / totalVLength) * 100;
-  const calOptOne = Math.round(quesOneVotesLen);
+
   const quesTwoVotesLen =
     (questions[id].optionTwo.votes.length / totalVLength) * 100;
-  const calOptTwo = Math.round(quesTwoVotesLen);
+  calOptOne = quesCal(quesOneVotesLen);
+  calOptTwo = quesCal(quesTwoVotesLen);
 
   return {
     question,

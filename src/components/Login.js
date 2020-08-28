@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Label, Row, Col, Form } from "reactstrap";
+import { Label, Row, Col } from "reactstrap";
 import { connect } from "react-redux";
 import "../css/login.css";
 import { setAuthedUser } from "../actions/authedUser";
@@ -34,7 +34,7 @@ class Login extends Component {
 
   render() {
     const { users } = this.props;
-    const { userId, errMsg } = this.state;
+    const { errMsg } = this.state;
 
     if (this.props.selectAuthedUser === true) {
       return <Redirect to={`/questions/${this.state.userId}`} />;
