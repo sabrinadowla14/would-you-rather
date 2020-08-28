@@ -1,12 +1,10 @@
 import React, { Fragment } from "react";
 import { connect } from "react-redux";
 import { Row, Col, Container } from "reactstrap";
-import NavBar from "./NavBar";
 import "../css/leaderboard.css";
-import Avatar from "./Avatar";
 
 function Leaderboard(props) {
-  const { users, userInfo } = props;
+  const { userInfo } = props;
   return (
     <Fragment>
       <h2 className="text-center my-3">

@@ -21,7 +21,7 @@ class User extends PureComponent {
               md={4}
               style={{ color: "blue", textDecoration: "none" }}
             >
-              <p className="userName">{user.name} Asks: </p>
+              <p className="userName">{user.name}</p>
             </Col>
           </Row>
         </Container>

@@ -19,7 +19,7 @@ class Login extends Component {
   };
 
   handleSubmitBtn = e => {
-    const { userId, errMsg } = this.state;
+    const { userId } = this.state;
 
     const { selectAuthedUser } = this.props;
 

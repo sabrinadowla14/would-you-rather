@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Card, CardBody, CardTitle } from "reactstrap";
-import { withRouter, Link } from "react-router-dom";
-import { VotesDetails } from "./VotesDetails";
+import { withRouter } from "react-router-dom";
 import "../css/question.css";
 import PageNotFound from "./PageNotFound";
 import User from "./User";
@@ -16,7 +15,7 @@ class Question extends Component {
     this.props.history.push(path);
   }
   render() {
-    const { question, authedUser, question_id, authorQ, id } = this.props;
+    const { question, authedUser, question_id, authorQ } = this.props;
     if (question === null) {
       return <PageNotFound />;
     }
@@ -52,7 +51,6 @@ class Question extends Component {
 
 function mapStateToProps(state, { id }) {
   const question = state.questions[id];
-  const user = state.users[state.users[state.authedUser]];
   const authorQ = state.users[state.questions[id].author];
   return {
     question_id: state.questions[id].id,

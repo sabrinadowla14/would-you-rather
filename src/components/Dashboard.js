@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-//import { Redirect } from "react-router-dom";
 import Question from "./Question";
 import {
   TabContent,
@@ -81,8 +80,6 @@ class Dashboard extends Component {
 }
 
 function mapStateToProps({ questions, users, authedUser }) {
-  const user = users[authedUser];
-
   const ansQuesIds = authedUser
     ? Object.keys(users[authedUser].answers).sort(
         (a, b) =>
