@@ -6,7 +6,7 @@ import "../css/leaderboard.css";
 import Avatar from "./Avatar";
 
 function Leaderboard(props) {
-  const { users, userScore } = props;
+  const { users, userInfo } = props;
   return (
     <Fragment>
       <h2 className="text-center my-3">
@@ -15,23 +15,23 @@ function Leaderboard(props) {
       <Container>
         <Row>
           <Col xs={6} md={3}>
-            Users Images
+            Users Images
           </Col>
           <Col xs={6} md={3}>
-            Users Name
+            Users Name
           </Col>
           <Col xs={6} md={3}>
-            No of Questions Asked
+            No of Questions Asked
           </Col>
           <Col xs={6} md={3}>
-            Answered Questions
+            Answered Questions
           </Col>
         </Row>
-        {users.map((user, index) => (
-          <Row key={user}>
+        {userInfo.map(user => (
+          <Row key={user.id}>
             <Col xs={6} md={3}>
               <img
-                src={user.avatarURL}
+                src={user.avatar}
                 className="avatar"
                 alt={`Avatar of ${user.name}`}
               />
@@ -40,10 +40,10 @@ function Leaderboard(props) {
               {user.name}
             </Col>
             <Col xs={6} md={3}>
-              {userScore.quesCreated}
+              {user.noOfQueCnt}
             </Col>
             <Col xs={6} md={3}>
-              {userScore.uesAns}
+              {user.noOfAnsCnt}
             </Col>
           </Row>
         ))}
@@ -52,21 +52,21 @@ function Leaderboard(props) {
   );
 }
 
-const mapStateToProps = ({ users }) => {
-  const userScore = uid => {
-    return {
-      uid,
-      quesCreated: users[uid].questions.length,
-      quesAns: Object.keys(users[uid].answers).length
-    };
-  };
-  return {
-    users: Object.values(users).sort(
-      (a, b) => b.quesCreated + b.quesAns - (a.quesCreated + a.quesAns)
-    ),
+function mapStateToProps({ users }) {
+  const userInfo = Object.values(users)
+    .map(user => ({
+      id: user.id,
+      name: user.name,
+      avatar: user.avatarURL,
+      noOfAnsCnt: Object.values(user.answers).length,
+      noOfQueCnt: user.questions.length,
+      totalScore: Object.values(user.answers).length + user.questions.length
+    }))
+    .sort((a, b) => b.totalScore - a.totalScore);
 
-    userScore
+  return {
+    userInfo
   };
-};
+}
 
 export default connect(mapStateToProps)(Leaderboard);
