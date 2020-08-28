@@ -40,10 +40,10 @@ function Leaderboard(props) {
               {user.name}
             </Col>
             <Col xs={6} md={3}>
-              {user.questions.length}
+              {user.quesCreated}
             </Col>
             <Col xs={6} md={3}>
-              {Object.keys(user.answers).length}
+              {user.quesAns}
             </Col>
           </Row>
         ))}
