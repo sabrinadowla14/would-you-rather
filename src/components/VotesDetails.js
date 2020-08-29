@@ -43,7 +43,7 @@ class VotesDetails extends Component {
       calOptOne,
       calOptTwo
     } = this.props;
-    if (question === null) {
+    if (!question || question === null) {
       return <PageNotFound />;
     }
     const { optionChosen } = this.state;
@@ -149,9 +149,13 @@ function quesCal(x) {
 function mapStateToProps({ questions, users, authedUser }, { match }) {
   let calOptOne, calOptTwo, totalVLength, answer;
   const user = users[authedUser];
+  //const answers = authedUser ? users[authedUser].answers : [];
 
   const { id } = match.params;
   const question = questions[id];
+  if (!question || question === null) {
+    return <PageNotFound />;
+  }
   if (user.answers.hasOwnProperty(questions[id].id)) {
     answer = user.answers[question.id];
   }

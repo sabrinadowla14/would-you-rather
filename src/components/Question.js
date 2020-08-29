@@ -16,7 +16,7 @@ class Question extends Component {
   }
   render() {
     const { question, authedUser, question_id, authorQ } = this.props;
-    if (question === null) {
+    if (!question || question === null) {
       return <PageNotFound />;
     }
     return (

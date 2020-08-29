@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import { Button, Card, CardBody, CardHeader } from "reactstrap";
-import CardTitle from "reactstrap/es/CardTitle";
+import { Button, Card, CardBody, CardHeader, CardTitle } from "reactstrap";
 
 class PageNotFound extends Component {
   render() {
