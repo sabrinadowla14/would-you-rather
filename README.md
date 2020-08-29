@@ -16,6 +16,7 @@ In "Would You Rather?" Project, I built a web app that lets a user play the "Wou
 - npm install redux-thunk
 - npm install --save react-router-dom
 - npm install react-redux-form@latest --save
+- npm install --save reactstrap
 
 ## Project Setup
 
