@@ -45,7 +45,8 @@ class Login extends Component {
           <form id="login-info" onSubmit={this.handleSubmitBtn}>
                             
             <div className="form-group">
-              <h3>Welcome to Would you Rather</h3>
+              <h3>Welcome to:</h3>
+              <h4>Would you Rather</h4>
               <Label for="selectUserOpt">Drop-Down to select User:</Label>
                 {errMsg ? <p className="text-danger">{errMsg}</p> : null}
                               

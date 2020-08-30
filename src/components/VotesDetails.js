@@ -17,6 +17,7 @@ import User from "./User";
 import { handleAddQuestionAnswer } from "../actions/shared";
 import "../css/voteDetails.css";
 import PageNotFound from "./PageNotFound";
+//import { Redirect } from "react-router";
 
 class VotesDetails extends Component {
   state = {

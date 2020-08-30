@@ -3,8 +3,10 @@ import { connect } from "react-redux";
 import { Card, CardBody, CardTitle } from "reactstrap";
 import { withRouter } from "react-router-dom";
 import "../css/question.css";
-import PageNotFound from "./PageNotFound";
+//import PageNotFound from "./PageNotFound";
 import User from "./User";
+//import { Redirect } from "react-router";
+import PageNotFound from "./PageNotFound";
 
 class Question extends Component {
   constuctor() {
@@ -19,6 +21,7 @@ class Question extends Component {
     if (!question || question === null) {
       return <PageNotFound />;
     }
+
     return (
       <Card onClick={e => this.quesInfo(e, question_id)}>
         <CardBody>
