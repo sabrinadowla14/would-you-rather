@@ -16,7 +16,7 @@ class PageNotFound extends Component {
               color="primary"
               onClick={() => history.push("/")}
             >
-              Home
+              Dashboard
             </Button>
           </CardBody>
         </Card>

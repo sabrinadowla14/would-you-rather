@@ -42,7 +42,7 @@ class Login extends Component {
     return (
       <Row>
         <Col sm="8" md={{ size: 4, offset: 4 }}>
-          <form id="login-info" onSubmit={this.handleSubmitBtn}>
+          <form id="login-form" onSubmit={this.handleSubmitBtn}>
                             
             <div className="form-group">
               <h3>Welcome to:</h3>
