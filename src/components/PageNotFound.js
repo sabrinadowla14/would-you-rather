@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, Card, CardBody, CardHeader, CardTitle } from "reactstrap";
-
+import { withRouter } from "react-router";
 class PageNotFound extends Component {
   render() {
     const { history } = this.props;
@@ -25,4 +25,4 @@ class PageNotFound extends Component {
   }
 }
 
-export default PageNotFound;
+export default withRouter(PageNotFound);
